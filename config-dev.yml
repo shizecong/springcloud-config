@@ -1,2 +1,60 @@
-config:
-  info: "master branch,springcloud-config/config-dev.yml version=4" 
+server:
+  tomcat:
+    uri-encoding: UTF-8
+    max-threads: 100
+    min-spare-threads: 30
+# 数据源
+spring:
+  datasource:
+    name: druidDataSource
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      #driver-class-name: com.mysql.jdbc.Driver
+      driver-class-name: oracle.jdbc.driver.OracleDriver
+      #url: jdbc:mysql://localhost:3306/eims?useUnicode=true&zeroDateTimeBehavior=convertToNull&autoReconnect=true&characterEncoding=utf-8
+      url: jdbc:oracle:thin:@localhost:1521/ORCL
+      #username: root
+      username: vmspab
+      #password: root@321ZLP%rbn
+      password: hwsoft
+      filters: stat,wall,log4j,config
+      max-active: 100
+      initial-size: 10
+      max-wait: 60000
+      min-idle: 1
+      time-between-eviction-runs-millis: 60000
+      min-evictable-idle-time-millis: 300000
+      #validation-query: select 'x'
+      validation-query: select 'x' from dual
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: false
+      pool-prepared-statements: true
+      max-open-prepared-statements: 50
+      max-pool-prepared-statement-per-connection-size: 20
+  redis:
+    host: localhost
+    port: 6379
+    timeout: 10000
+    password: 
+# 分页插件   
+pagehelper:
+    #helperDialect: mysql
+    helperDialect: oracle
+    reasonable: true
+    supportMethodsArguments: true
+    pageSizeZero: false #pageSize=0
+#日志的方式打印sql
+logging:
+  level:
+    com.spsoft.ptxadmin.dao: DEBUG
+#自定义配置
+tmscommon:
+    #临时文件目录
+  tempDir: D:/ptxcloud/ptxArchive/temp
+   #附件存储目录
+  attachmentDir: D:/ptxcloud/ptxArchive/attachPath
+   #导入模版目录
+  templateDir: D:/ptxcloud/ptxArchive/templatePath
+   #导出模版目录
+  excelTemplateDir: D:/ptxcloud/ptxArchive/excelTemplate
